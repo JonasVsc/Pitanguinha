@@ -5,8 +5,14 @@
 
 int main()
 {
-	Ptg::Application Application; // TODO: Receive Application pointer of client code.
-	Application.Start();
+	try {
+		Ptg::Application Application; // TODO: Receive Application pointer of client code.
+		Application.Start();
+	}
+	catch (std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 }
 
 #endif
