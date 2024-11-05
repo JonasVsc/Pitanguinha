@@ -1,8 +1,15 @@
 #include "Pitanguinha.h"
 
-int main()
+class Sandbox : public Ptg::Application
 {
-	PTG_DEBUG("Massa");
+	Sandbox()
+	{
 
-	return 0;
-}
+	}
+
+	~Sandbox()
+	{
+
+	}
+
+};
