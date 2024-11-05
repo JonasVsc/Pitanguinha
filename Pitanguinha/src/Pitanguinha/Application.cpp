@@ -10,6 +10,7 @@ namespace Ptg {
 	{
 		m_Window = new Window;
 		m_Window->Create(1280, 720, "Pitanguinha");
+		m_Window->Init();
 	}
 
 	Application::~Application()

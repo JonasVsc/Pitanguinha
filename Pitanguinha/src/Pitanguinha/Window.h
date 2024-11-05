@@ -29,10 +29,9 @@ namespace Ptg {
 
 	private:
 
-		const char* m_Name;
-		unsigned int m_Width, m_Height;
-		
 		GLFWwindow* m_Window;
+		
+		WindowData m_Data;
 	};
 
 }
