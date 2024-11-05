@@ -1,9 +1,8 @@
-#include "Teste.h"
-#include "Log.h"
+#include "Pitanguinha.h"
 
 int main()
 {
-	Ptg::Print();
+	PTG_DEBUG("Massa");
 
 	return 0;
 }

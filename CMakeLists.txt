@@ -1,25 +1,17 @@
-cmake_minimum_required(VERSION 3.10)
-project(Pitanguinha)
-
-# ================= Pitanguinha ====================== #
-
-add_library(Pitanguinha SHARED 
-    "Pitanguinha/src/Log.h"
-    "Pitanguinha/src/Teste.cpp"
-    "Pitanguinha/src/Teste.h"
-)
-
-# ================== Sandbox ========================= #
-
-add_executable(Sandbox "Sandbox/src/SandboxApp.cpp") 
-
-target_link_libraries(Sandbox PRIVATE Pitanguinha)
-target_include_directories(Sandbox PRIVATE Pitanguinha/src)
+ï»¿# CMakeList.txt : Top-level CMake project file, do global configuration
+# and include sub-projects here.
+#
+cmake_minimum_required (VERSION 3.8)
 
 
-# Configurações para Modo Debug
-
-if(CMAKE_BUILD_TYPE STREQUAL "Debug" OR CMAKE_CONFIGURATION_TYPES MATCHES Debug)
-    target_compile_definitions(Sandbox PRIVATE PITANGUINHA_DEBUG)
-    target_compile_definitions(Pitanguinha PRIVATE PITANGUINHA_DEBUG)
+# Enable Hot Reload for MSVC compilers if supported.
+if (POLICY CMP0141)
+  cmake_policy(SET CMP0141 NEW)
+  set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>")
 endif()
+
+project ("Pitanguinha")
+
+# Include sub-projects.
+add_subdirectory ("Pitanguinha")
+add_subdirectory ("Sandbox")
