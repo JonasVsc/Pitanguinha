@@ -36,6 +36,11 @@ namespace Ptg {
 		PTG_DEBUG("Listening callbacks...");
 
 		// TODO: set callbacks
+		glfwSetErrorCallback([](int error_code, const char* description)
+		{
+			PTG_DEBUG("Error (" << error_code << ") " << description);
+		});
+
 		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window)
 		{
 			WindowData* data = static_cast<WindowData*>(glfwGetWindowUserPointer(window));
@@ -55,6 +60,36 @@ namespace Ptg {
 			}
 		});
 
+		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xpos, double ypos)
+		{
+			PTG_DEBUG("Cursor moved callback!");
+		});
+
+		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
+		{
+			switch (action)
+			{
+			case GLFW_PRESS:
+				PTG_DEBUG("Key " << key << " Pressed");
+				break;
+			case GLFW_RELEASE:
+				PTG_DEBUG("Key " << key << " Released");
+				break;
+			}
+		});
+
+		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods)
+		{
+			switch (action)
+			{
+			case GLFW_PRESS:
+				PTG_DEBUG("Mouse button " << button << " Pressed");
+				break;
+			case GLFW_RELEASE:
+				PTG_DEBUG("Mouse button " << button << " Released");
+				break;
+			}
+		});
 	}
 
 	void Window::Update()
