@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Core.h"
+#include "Window.h"
 
 namespace Ptg {
 
@@ -18,6 +19,8 @@ namespace Ptg {
 	
 	private:
 		bool m_ShouldTerminate = false;
+
+		Window* m_Window;
 	};
 
 }

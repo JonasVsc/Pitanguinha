@@ -2,11 +2,15 @@
 
 #include "Log.h"
 
+#include<GLFW/glfw3.h>
+
 namespace Ptg {
 
 	Application::Application()
 	{
-		PTG_DEBUG("Init successfully");
+		m_Window = new Window;
+		m_Window->Create(1280, 720, "Pitanguinha");
+		m_Window->Init();
 	}
 
 	Application::~Application()
@@ -18,11 +22,9 @@ namespace Ptg {
 		PTG_DEBUG("Entering Application Loop");
 		while (!m_ShouldTerminate)
 		{
-			// update events
+			// TODO: handle events
 
-			// draw stuff
-
-			// update window
+			m_Window->Update();
 		}
 	}
 
