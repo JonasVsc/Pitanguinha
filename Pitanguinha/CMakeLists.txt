@@ -1,9 +1,4 @@
-﻿# CMakeList.txt : CMake project for Pitanguinha, include source and define
-# project specific logic here.
-#
-
-# Add source to this project's executable.
-add_library(Pitanguinha SHARED 
+﻿add_library(Pitanguinha SHARED 
     "src/Pitanguinha/Log.h"
     
     "src/Pitanguinha/Core.h" 
