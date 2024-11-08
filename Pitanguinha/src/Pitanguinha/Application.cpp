@@ -21,11 +21,70 @@ namespace Ptg {
 	void Application::Start()
 	{
 		PTG_DEBUG("Entering Application Loop");
+		
+		GLuint VAO, VBO;
+		GLuint vertShader, fragShader, program;
+		const char* vertexShaderSource = "#version 330 core\n"
+			"layout (location = 0) in vec3 aPos;\n"
+			"void main()\n"
+			"{\n"
+			"   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+			"}\0";
+
+		const char* fragmentShaderSource = "#version 330 core\n"
+			"out vec4 FragColor;\n"
+			"void main()\n"
+			"{\n"
+			"   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+			"}\n\0";
+
+		vertShader = glCreateShader(GL_VERTEX_SHADER);
+		glShaderSource(vertShader, 1, &vertexShaderSource, NULL);
+		glCompileShader(vertShader);
+
+		fragShader = glCreateShader(GL_FRAGMENT_SHADER);
+		glShaderSource(fragShader, 1, &fragmentShaderSource, NULL);
+		glCompileShader(fragShader);
+
+		program = glCreateProgram();
+		glAttachShader(program, vertShader);
+		glAttachShader(program, fragShader);
+		glLinkProgram(program);
+
+		float vertices[] = {
+			-0.5f, -0.5f, 0.0f,
+			 0.5f, -0.5f, 0.0f,
+			 0.0f,  0.5f, 0.0f
+		};
+
+		glGenBuffers(1, &VBO);
+		glBindBuffer(GL_ARRAY_BUFFER, VBO);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+		glGenVertexArrays(1, &VAO);
+		glBindVertexArray(VAO);
+
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+		glEnableVertexAttribArray(0);
+
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindVertexArray(0);
+
+
 		while (!m_ShouldTerminate)
 		{
 			// TODO: handle events
+			glClearColor(0.0f, 0.5f, 0.0f, 1.0f);
+			glClear(GL_COLOR_BUFFER_BIT);
+
+			glUseProgram(program);
+			glBindVertexArray(VAO);
+
+			glDrawArrays(GL_TRIANGLES, 0, 3);
 
 			m_Window->Update();
+			glBindVertexArray(0);
+
 		}
 	}
 

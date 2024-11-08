@@ -6,9 +6,8 @@
 #include "Events/Event.h"
 #include "Events/WindowEvent.h"
 
-namespace Ptg {
 
-	
+namespace Ptg {
 
 	Window::~Window()
 	{
@@ -34,6 +33,10 @@ namespace Ptg {
 			PTG_DEBUG("Error: glfwCreateWindow()");
 
 		glfwMakeContextCurrent(m_Window);
+
+		int status = gladLoadGL((GLADloadfunc)glfwGetProcAddress);
+
+
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 
 		PTG_DEBUG("Listening callbacks...");

@@ -1,7 +1,7 @@
 ﻿add_executable(Sandbox "src/SandboxApp.cpp") 
 
 target_link_libraries(Sandbox PRIVATE Pitanguinha)
-target_link_libraries(Sandbox PRIVATE glfw)
+target_link_libraries(Sandbox PRIVATE glfw glad)
 target_include_directories(Sandbox PRIVATE "../Pitanguinha/src")
 
 add_custom_command(TARGET Sandbox POST_BUILD

@@ -19,10 +19,12 @@ target_precompile_headers(Pitanguinha PRIVATE "src/pch.h")
 target_include_directories(Pitanguinha PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 add_subdirectory(3rdparty/glfw)
+add_subdirectory(3rdparty/glad)
 
-# glfw
+target_include_directories(Pitanguinha PRIVATE 3rdparty/glad/include)
 target_include_directories(Pitanguinha PRIVATE 3rdparty/glfw/include)
-target_link_libraries(Pitanguinha PRIVATE glfw)
+target_link_libraries(Pitanguinha PRIVATE glfw glad)
+
 
 if(WIN32)
     target_compile_definitions(Pitanguinha PRIVATE 
