@@ -1,4 +1,7 @@
-﻿add_library(Pitanguinha SHARED 
+﻿include_directories(3rdparty/stb_image.h)
+
+add_library(Pitanguinha SHARED 
+    "src/Pitanguinha/stb_image.h"
     "src/Pitanguinha/Log.h"
     
     "src/Pitanguinha/Core.h" 
@@ -13,7 +16,11 @@
 
     "src/Pitanguinha.h"
     "src/pch.h"
- "src/Pitanguinha/Events/Event.h" "src/Pitanguinha/Events/WindowEvent.h" "src/Pitanguinha/Events/EventDispatcher.h")
+
+     "src/Pitanguinha/Events/Event.h" 
+     "src/Pitanguinha/Events/WindowEvent.h" 
+     "src/Pitanguinha/Events/EventDispatcher.h"
+)
 
 target_precompile_headers(Pitanguinha PRIVATE "src/pch.h")
 target_include_directories(Pitanguinha PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
@@ -32,4 +39,10 @@ if(WIN32)
         PTG_BUILD_DLL)
 endif()
 
+add_custom_target(copy_assets ALL
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/assets ${EXECUTABLE_OUTPUT_PATH}/assets
+)
 
+
+
+file(COPY ${CMAKE_SOURCE_DIR}/Pitanguinha/logo DESTINATION ${CMAKE_BINARY_DIR}/Sandbox)

@@ -11,7 +11,8 @@ add_custom_command(TARGET Sandbox POST_BUILD
     COMMENT "Copying Pitanguinha.dll to Sandbox output directory"
 )
 
+
+
 if(WIN32)
     target_compile_definitions(Sandbox PRIVATE PTG_PLATFORM_WINDOWS)
 endif()
-

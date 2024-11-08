@@ -6,6 +6,8 @@
 #include "Events/Event.h"
 #include "Events/WindowEvent.h"
 
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
 namespace Ptg {
 
@@ -31,6 +33,22 @@ namespace Ptg {
 		m_Window = glfwCreateWindow((int)m_Data.Width, (int)m_Data.Height, m_Data.App_name, nullptr, nullptr);
 		if(m_Window == nullptr)
 			PTG_DEBUG("Error: glfwCreateWindow()");
+
+		// Carregar a imagem do ícone
+		int width, height, channels;
+		unsigned char* pixels = stbi_load("logo/pitanguinha.png", &width, &height, &channels, 4); // Carregar como RGBA
+		if (pixels) {
+			GLFWimage icon;
+			icon.width = width;
+			icon.height = height;
+			icon.pixels = pixels;
+
+			// Definir o ícone da janela
+			glfwSetWindowIcon(m_Window, 1, &icon);
+
+			// Liberar a imagem do ícone após usá-la
+			stbi_image_free(pixels);
+		}
 
 		glfwMakeContextCurrent(m_Window);
 
