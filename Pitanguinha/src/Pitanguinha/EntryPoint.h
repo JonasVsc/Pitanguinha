@@ -2,12 +2,14 @@
 
 #ifdef PTG_PLATFORM_WINDOWS
 
+extern Ptg::Application* Ptg::CreateApplication();
 
 int main()
 {
 	try {
-		Ptg::Application Application; // TODO: Receive Application pointer of client code.
-		Application.Start();
+		auto app = Ptg::CreateApplication();
+		app->Start();
+		delete app;
 	}
 	catch (std::exception& e)
 	{

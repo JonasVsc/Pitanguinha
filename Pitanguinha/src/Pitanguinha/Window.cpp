@@ -3,6 +3,9 @@
 
 #include "Log.h"
 
+#include "Events/Event.h"
+#include "Events/WindowEvent.h"
+
 namespace Ptg {
 
 	
@@ -43,12 +46,9 @@ namespace Ptg {
 
 		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window)
 		{
-			WindowData* data = static_cast<WindowData*>(glfwGetWindowUserPointer(window));
-			if (data) 
-			{
-				PTG_DEBUG("Window close callback!");
-				glfwSetWindowShouldClose(window, true);
-			}
+			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+			WindowCloseEvent event;
+			data.EventCallback(event);
 		});
 
 		glfwSetFramebufferSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)

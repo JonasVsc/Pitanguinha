@@ -2,6 +2,7 @@
 
 class Sandbox : public Ptg::Application
 {
+public:
 	Sandbox()
 	{
 
@@ -13,3 +14,8 @@ class Sandbox : public Ptg::Application
 	}
 
 };
+
+Ptg::Application* Ptg::CreateApplication()
+{
+	return new Sandbox();
+}

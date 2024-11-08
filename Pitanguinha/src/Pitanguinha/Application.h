@@ -3,6 +3,10 @@
 #include "Core.h"
 #include "Window.h"
 
+#include "Events/Event.h"
+#include "Events/WindowEvent.h"
+
+
 namespace Ptg {
 
 
@@ -15,12 +19,19 @@ namespace Ptg {
 
 		void Start();
 
+		void OnEvent(Event& e);
+
 		void OnShutdown();
 	
 	private:
+
+		bool OnWindowClose(WindowCloseEvent& e);
+
 		bool m_ShouldTerminate = false;
 
 		Window* m_Window;
 	};
+
+	Application* CreateApplication();
 
 }

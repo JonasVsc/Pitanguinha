@@ -13,7 +13,7 @@
 
     "src/Pitanguinha.h"
     "src/pch.h"
-)
+ "src/Pitanguinha/Events/Event.h" "src/Pitanguinha/Events/WindowEvent.h" "src/Pitanguinha/Events/EventDispatcher.h")
 
 target_precompile_headers(Pitanguinha PRIVATE "src/pch.h")
 target_include_directories(Pitanguinha PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
