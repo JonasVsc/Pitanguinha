@@ -1,3 +1,7 @@
 [submodule "Pitanguinha/3rdparty/glfw"]
 	path = Pitanguinha/3rdparty/glfw
 	url = https://github.com/glfw/glfw.git
+[submodule "Pitanguinha/3rdparty/imgui"]
+	path = Pitanguinha/3rdparty/imgui
+	url = https://github.com/ocornut/imgui.git
+	branch = docking

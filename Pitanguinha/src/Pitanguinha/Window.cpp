@@ -9,6 +9,10 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
+#include "imgui.h"
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_opengl3.h"
+
 namespace Ptg {
 
 	Window::~Window()
@@ -54,12 +58,18 @@ namespace Ptg {
 
 		int status = gladLoadGL((GLADloadfunc)glfwGetProcAddress);
 
+		// setup imgui
+		IMGUI_CHECKVERSION();
+		ImGui::CreateContext();
+		ImGui::StyleColorsDark();
+
+		ImGui_ImplGlfw_InitForOpenGL(m_Window, true);
+		ImGui_ImplOpenGL3_Init("#version 330");
 
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 
 		PTG_DEBUG("Listening callbacks...");
 
-		// TODO: set callbacks
 		glfwSetErrorCallback([](int error_code, const char* description)
 		{
 			PTG_DEBUG("Error (" << error_code << ") " << description);
@@ -115,7 +125,7 @@ namespace Ptg {
 
 	void Window::Update()
 	{
-		glfwPollEvents();
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 		glfwSwapBuffers(m_Window);
 	}
 

@@ -3,6 +3,9 @@
 #include "Log.h"
 
 #include<GLFW/glfw3.h>
+#include "imgui.h"
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_opengl3.h"
 
 
 namespace Ptg {
@@ -73,18 +76,23 @@ namespace Ptg {
 
 		while (!m_ShouldTerminate)
 		{
-			// TODO: handle events
-			glClearColor(0.0f, 0.5f, 0.0f, 1.0f);
+			glfwPollEvents();
+
+			ImGui_ImplOpenGL3_NewFrame();
+			ImGui_ImplGlfw_NewFrame();
+			ImGui::NewFrame();
+
+			ImGui::Begin("Test");
+			ImGui::Text("Testing ImGui");
+			ImGui::End();
+
+			ImGui::Render();
+
 			glClear(GL_COLOR_BUFFER_BIT);
+			glClearColor(0.0f, 0.4f, 0.8f, 1.0f);
 
-			glUseProgram(program);
-			glBindVertexArray(VAO);
-
-			glDrawArrays(GL_TRIANGLES, 0, 3);
 
 			m_Window->Update();
-			glBindVertexArray(0);
-
 		}
 	}
 

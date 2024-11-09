@@ -1,4 +1,7 @@
-﻿include_directories(3rdparty/stb_image.h)
+﻿include_directories(3rdparty/imgui)
+include_directories(3rdparty/imgui/backends)
+
+add_library(ImGui STATIC )
 
 add_library(Pitanguinha SHARED 
     "src/Pitanguinha/stb_image.h"
@@ -17,9 +20,18 @@ add_library(Pitanguinha SHARED
     "src/Pitanguinha.h"
     "src/pch.h"
 
-     "src/Pitanguinha/Events/Event.h" 
-     "src/Pitanguinha/Events/WindowEvent.h" 
-     "src/Pitanguinha/Events/EventDispatcher.h"
+    "src/Pitanguinha/Events/Event.h" 
+    "src/Pitanguinha/Events/WindowEvent.h" 
+    "src/Pitanguinha/Events/EventDispatcher.h"
+
+    #imgui
+    "3rdparty/imgui/imgui.cpp"
+    "3rdparty/imgui/imgui_demo.cpp"
+    "3rdparty/imgui/imgui_draw.cpp"
+    "3rdparty/imgui/imgui_tables.cpp"
+    "3rdparty/imgui/imgui_widgets.cpp"
+    "3rdparty/imgui/backends/imgui_impl_opengl3.cpp" 
+    "3rdparty/imgui/backends/imgui_impl_glfw.cpp"    
 )
 
 target_precompile_headers(Pitanguinha PRIVATE "src/pch.h")
