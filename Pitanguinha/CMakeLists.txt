@@ -1,8 +1,6 @@
 ﻿include_directories(3rdparty/imgui)
 include_directories(3rdparty/imgui/backends)
 
-add_library(ImGui STATIC )
-
 add_library(Pitanguinha SHARED 
     "src/Pitanguinha/stb_image.h"
     "src/Pitanguinha/Log.h"
@@ -39,10 +37,12 @@ target_include_directories(Pitanguinha PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 add_subdirectory(3rdparty/glfw)
 add_subdirectory(3rdparty/glad)
+add_subdirectory(3rdparty/glm)
+
 
 target_include_directories(Pitanguinha PRIVATE 3rdparty/glad/include)
 target_include_directories(Pitanguinha PRIVATE 3rdparty/glfw/include)
-target_link_libraries(Pitanguinha PRIVATE glfw glad)
+target_link_libraries(Pitanguinha PRIVATE glfw glad glm)
 
 
 if(WIN32)
